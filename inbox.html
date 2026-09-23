@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Abi! 🎂</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #0b0b16;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+        }
+
+        /* FLOATING BALLOONS & CAKES BACKGROUND EFFECT */
+        .balloon, .cake-emoji {
+            position: absolute;
+            bottom: -100px;
+            font-size: 2.5rem;
+            animation: floatUp 8s linear infinite;
+            z-index: 1;
+            opacity: 0.5;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
+        }
+
+        /* COMMON PAGE STYLING */
+        .page {
+            display: none; 
+            background: rgba(255, 255, 255, 0.04);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            max-width: 580px;
+            width: 90%;
+            z-index: 10;
+            position: relative;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .page.active {
+            display: flex;
+        }
+
+        h1.heading {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px #ff007f;
+            line-height: 1.4;
+        }
+
+        .next-nav-btn {
+            background: linear-gradient(45deg, #ffdd00, #ffaa00);
+            color: #000;
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 0 15px rgba(255, 221, 0, 0.5);
+            transition: 0.3s;
+        }
+        .next-nav-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* PAGE 1: HOME (QUIZ SCREEN) */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            height: 80px;
+            width: 100%;
+            align-items: center;
+        }
+        .quiz-btn {
+            padding: 12px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        #yes-btn {
+            background: linear-gradient(45deg, #00f260, #0575e6);
+            color: white;
+            box-shadow: 0 0 15px rgba(0, 242, 96, 0.6);
+        }
+        #no-btn {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 65, 108, 0.6);
+        }
+
+        /* PAGE 2: OUR MESSAGE (VERTICAL SCROLL) */
+        .scrolling-message-container {
+            width: 100%;
+            height: 280px;
+            overflow: hidden; 
+            position: relative;
+            background: rgba(0, 0, 0, 0.6); 
+            border-radius: 15px;
+            padding: 15px;
+            border: 2px solid rgba(255, 221, 0, 0.3);
+
+}
+        .scrolling-text {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            padding: 0 20px;
+            text-align: center;
+            line-height: 1.9;
+            font-size: 1.05rem;
+            color: #fff;
+            animation: scrollUpLong 35s linear infinite; 
+        }
+        @keyframes scrollUpLong {
+            0% { top: 100%; }
+            100% { top: -1000%; } 
+        }
+        .scrolling-message-container:hover .scrolling-text {
+            animation-play-state: paused;
+        }
+
+        /* PAGE 3: BIRTHDAY VIBES (HORIZONTAL SLIDER) */
+        .subtitle-text {
+            font-size: 1.1rem;
+            color: #00f260;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        .horizontal-gallery-container {
+            width: 100%;
+            height: 210px;
+            overflow: hidden;
+            position: relative;
+            white-space: nowrap;
+            border-radius: 15px;
+            border: 3px solid #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            background: #000;
+            margin-bottom: 15px;
+        }
+        .horizontal-track {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scrollSideways 22s linear infinite;
+        }
+        .horizontal-track img {
+            width: 160px;
+            height: 190px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+            display: inline-block;
+        }
+        @keyframes scrollSideways {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+        .horizontal-gallery-container:hover .horizontal-track {
+            animation-play-state: paused;
+        }
+
+        .audio-warning-text {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ffdd00;
+            text-shadow: 0 0 10px rgba(255, 221, 0, 0.7);
+            margin-top: 15px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="animation-background"></div>
+
+    <!-- =======================================================
+         PAGE 1: HOME (QUIZ ZONE WITH TOUCH ERRORS)
+         ======================================================= -->
+    <div id="page-home" class="page active">
+        <h1 class="heading" id="question-text">டேய் அபி (Abi)!<br>இன்னைக்கு உனக்கு Birthday-ஆ டா? 🤔</h1>
+        <div class="btn-group">
+            <button id="yes-btn" class="quiz-btn" onclick="handleYes()">YES</button>
+            <button id="no-btn" class="quiz-btn" onclick="handleNoTouch()">NO</button>
+        </div>
+    </div>
+
+
+    <!-- =======================================================
+         PAGE 2: OUR MESSAGE (LONG TEXT VERTICAL SCROLL)
+         ======================================================= -->
+    <div id="page-message" class="page">
+        <h1 class="heading" style="color: #ffdd00;">✨ இத உனக்காக டைப் பண்ணுனது... ✨</h1>
+        
+        <div class="scrolling-message-container">
+            <div class="scrolling-text">
+                Dai....
+Idha solliye Aaganum ipo.
+😇
+Unmiya unexpected kedacha friend thaa daw nee 😇...
+Unmiya solla pona, midhun kooda pesama pona piragu friends full ah veruthu irundhen...
+Yaarkkittayum pesa koodadhu entu mind set la irundhen 🫠...
+Unmiya romba effort Aagunuchi andha time la....<br>
+
+Adhu illla,
+Nee starting la pesunapo,
+"yaaru daw iven,iven kooda ye pesanum, pesama blk panniruvoma entu nenachen 🤔"...
+But ipo illla,Adhu Apo...<br>
+
+Na neraya time solluve thane...
+Konjam different friend nee mattum Thaa entu...<br>
+🫣...
+
+Ye theriyuma???
+Romba yoshikkadha 😏
+Naaney soldren...
+Naa Thaa neraya per A chatter pannuven, upset Aakkuven....
+Ennaye upset Aakkura oruthen,nee mattum Thaa daw😳🙁....<br>
+
+But parawalla adhum nalla Thaa irundhuchi,...
+Unmiya kowam varum onkitta pesunaaley 😖
+Irrritate pannuva daw😖🙄...
+Nee oru oru kadha solluva paaru 😖...
+But nalla Thaa irukku,....<br>
+
+Enkitta nee sudden ah ketta oru naal "enakku best frd ah irukkiya entu"...
+Andha time sari ok nnu sonnen...<br>
+😇..
+
+Unmiya neraya dreams Ellaa irundhuchi daw...
+😅
+Onkitta sollirukke thane...
+Onkootta bike la suththanum,nee sapatu vaangi kututhu "saptu saptu entu thalai la kutti kutti sapta vaikkanum",aprom konjam midhusha va possessive Pannanum 😁,unga veettukku varanum,unga Amma Appa kooda Ellaa close Aaganum,unna paththi naaney kevalama thittanum unga Appa Amma kitta 😅,....
+Ipdi neraya Aasa irundhuchi daw...
+Nee nambuviya nnu kooda theriyala 🥲, unmiya irundhuchi....
+Idhu oru siladhu mattum solliruppen🫠<br>
+...
+
+Ipo edhum nadakkadhu ennada?🥲🫠...
+Saththiyama na mattum Enna kanava daw kanden?
+Thirumba aven pesuvaan,thirumba naanum pesiruveney nnu 🥲...
+Theriyala,edho oru situation la Aagi pochi ☺️....
+Adhaa unkitta ketten,
+2 years munnadi varadhu illlaya daw nee 🫠...
+Vandhu irukkalamey.....<br>
+Enna seyya,time travel panni maththa yeladhey ☺️🫠.....
+Unmiya enakku ipo varaikkum kastama irukku daw 🥲...
+Unakku nambikka kututhu..
+Yemathuna madhuri Aagi pochi 🫠....
+Unmiya 2 months onkootta pesi irundhaalum,semma memories kututhutta 🫂🥲...
+Yaarum kutukkkadha memories ☺️....<br>
+Ok ok overa pesuna, enakkey upset Aagirum innum,...<br>
+<b>Innaikku ooo birthday,so edhum yoshikkama enjoy pannu 🥳♥️🫂....</b><br>
+Kandippa next birthday kku sari na pakkathula iruppena nnu theriyala,.
+Try pannuven🫠....<br>
+Enakkaga ore oru vishiyam mattum mathippiya nnu theriyala,but irundhaalum soldren....<br>
+Hurt pannadha daw,..
+Enna mattum illla,
+Yaara irundhaalum,....
+Oru thadava manasu odachitta,thirumba sari seyradhu kastam daw🥲....
+Mathikka venaa...
+Mudinja kurachikko....<br>
+Aprom koolip adikkiradhayum korachikko...
+Innum skin damage Aagum,..
+Enakku vilangudhu...
+Eppovachi Thane kudikkira nee...
+Eppovachi kudichaalum problem Thaa ☺️...
+Mudinja adhum kurachikka paaru ....<br>
+Aprom Enna,..
+ dilani A marandhuradha daw....
+😇...<br>
+Kawanam,
+Life la nee success Aaganum....
+Kadavul nambikka illa thaan 🙁🙄...
+Irundhaalum unakkaga pray pannikkiren....<br>
+Namakku edhum Aagadhu...
+Nalla iruppom...
+Negative Ah yoshikkiradha first stop pannu eruma ...😖
+Positive Ah think pannu..
+Sariya? ...<br>
+Love layum success Aaguva...
+Nalla iruppinga da rendu perum...
+😇👍🏻...<br>
+Na ooo life vittu ponaalum...
+Feel pannadha 🥲🫠..
+Panna koodadhu...
+Veruthuradha daw 🫠..
+Plz.....<br>
+Kawanam...
+🫂
+Miss uwww ♥️🫂
+                (இங்க உங்க முழு மெசேஜையும் ரீப்ளேஸ் பண்ணிக்கோங்க மச்சான்!)
+            </div>
+        </div>
+
+        <button class="next-nav-btn" onclick="navigateTo('page-vibes')">Next: Surprise Slide 👉</button>
+    </div>
+
+
+    <!-- =======================================================
+         PAGE 3: BIRTHDAY VIBES (SLIDER & AUDIO)
+         ======================================================= -->
+    <div id="page-vibes" class="page">
+        <h1 class="heading">🎉 HAPPY BIRTHDAY ABI DA! 🎉</h1>
+        <p class="subtitle-text">~ Memories Core Loaded ⚡ ~</p>
+
+        <div class="horizontal-gallery-container">
+            <div class="horizontal-track">
+                <img src="photo1.jpg" alt="Abi Pic 1">
+                <img src="photo2.jpg" alt="Abi Pic 2">
+                <img src="photo3.jpg" alt="Abi Pic 3">
+                <img src="photo4.jpg" alt="Abi Pic 4">
+                <img src="photo5.jpg" alt="Abi Pic 5">
+                <img src="photo1.jpg" alt="Abi Pic 1">
+                <img src="photo2.jpg" alt="Abi Pic 2">
+            </div>
+        </div>
+
+        <p class="audio-warning-text">📢 சவுண்டா வச்சு கேளுடா மாப்ள! 🎵</p>
+
+        <audio id="bday-bgm" src="birthday_song.mp3" loop></audio>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        let noClickCount = 0; // To track how many times 'No' is touched
+        const noBtn = document.getElementById('no-btn');
+        const yesBtn = document.getElementById('yes-btn');
+        const qText = document.getElementById('question-text');
+
+        function createDecors() {
+            const container = document.getElementById('animation-background');
+            const icons = ['🎈', '🎈', '🎂', '🎉'];
+            for(let i=0; i<20; i++) {
+                let element = document.createElement('div');
+                element.className = i % 3 === 0 ? 'cake-emoji' : 'balloon';
+                element.innerText = icons[Math.floor(Math.random() * icons.length)];
+                element.style.left = Math.random() * 100 + 'vw';
+                element.style.animationDelay = Math.random() * 6 + 's';
+                element.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                container.appendChild(element);
+            }
+        }
+        createDecors();
+
+        // NEW TOUCH / CLICK ERROR LOGIC FOR 'NO' BUTTON
+        function handleNoTouch() {
+            noClickCount++;
+
+            if (noClickCount === 1) {
+                alert("❌ ERROR 404: உன்னால 'No' சொல்ல முடியாது டா அபி! ஒழுங்கா 'Yes' கிளிக் பண்ணு! 😂");
+                qText.innerHTML = "ஏமாத்த பார்க்காத... 😉<br>அப்போ இன்னைக்கு சாயங்காலம் செம 'Treat' இருக்குல்ல?";
+            } 
+            else if (noClickCount === 2) {
+                alert("🚨 SYSTEM WARNING: ட்ரீட் தராம தப்பிக்க முடியாது மாப்ள! 'Yes' மட்டும் தான் வேலை செய்யும்!");
+                qText.innerHTML = "கடைசி கேள்வி:<br>உன் பிரண்ட்ஸ்-லயே நான் தான் உனக்கு கிடைச்ச ஆகச்சிறந்த 'Best Friend'னு ஒத்துக்குறியா? 😎";
+            } 
+            else if (noClickCount === 3) {
+                alert("💥 SYSTEM CRASH: ஆப்ஷனே இல்லடா! இனிமே 'No' பட்டன் 'Yes' ஆ மாறிடும்! ஹா ஹா!");
+                
+                // Transform NO button into a second YES button as a prank
+                noBtn.innerText = "YES";
+                noBtn.style.background = "linear-gradient(45deg, #00f260, #0575e6)";
+                noBtn.style.boxShadow = "0 0 15px rgba(0, 242, 96, 0.6)";
+                // Change its function so clicking it now triggers YES
+                noBtn.onclick = function() { handleYes(); };
+            }
+        }
+
+        // QUIZ STEP LOGIC FOR 'YES'
+        function handleYes() {
+            if (noClickCount < 1) {
+                // If they directly click YES without hitting NO, advance questions manually
+                noClickCount = 1;
+                qText.innerHTML = "சரி சரி ஒத்துக்குறேன்... 😉<br>அப்போ இன்னைக்கு சாயங்காலம் செம 'Treat' இருக்குல்ல?";
+            } else if (noClickCount === 1) {
+                noClickCount = 2;
+                qText.innerHTML = "கடைசி கேள்வி:<br>உன் பிரண்ட்ஸ்-லயே நான் தான் உனக்கு கிடைச்ச ஆகச்சிறந்த 'Best Friend'னு ஒத்துக்குறியா? 😎";
+            } else {
+                // Move to Page 2
+                navigateTo('page-message');
+            }
+        }
+
+        // NAVIGATION SYSTEM FOR MULTI-PAGE
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            const targetPage = document.getElementById(pageId);
+            targetPage.classList.add('active');
+
+            if (pageId === 'page-vibes') {
+                const audio = document.getElementById('bday-bgm');
+                audio.play().catch(e => console.log("Audio autoplay handled."));
+            }
+        }
+    </script>
+</body>
+</html>
